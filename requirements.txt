@@ -11,3 +11,4 @@ urllib3==1.25.11
 feedparser==6.0.2
 Flask==2.0.1
 Gunicorn
+Werkzeug==0.16.1
