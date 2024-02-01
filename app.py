@@ -398,4 +398,4 @@ def settings():
                  pass
       return render_template("settings.html",userdp=userdp,success=success)
 if __name__=="__main__":
-    app.run( port=5000, debug=True)
+    app.run(debug=True)
