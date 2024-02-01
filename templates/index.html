@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" 
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>picsta</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+</head>
+<style>
+body {background:#1c1c1c;color:white;font-family: 'Pixelify Sans', bold;
+font-size:20px;
+
+ 
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 50px; /* Adjust the height as needed */
+  display: flex;
+  align-items: center; /* Align items vertically */
+
+}
+
+.logo  {
+  height: 20px; /* Set the height of your logo */
+  margin-left: 0px; /* Add some space to the left of the logo */
+font-family: 'Pixelify Sans', bold;
+font-size:20px;
+color:white
+}
+.dp{  height: 50px; 
+ width:50px;
+  margin-left: 0px; /* Add some space to the left of the logo */
+font-family: 'Pixelify Sans', bold;
+font-size:20px;
+color:white;
+border-radius:50px
+}
+li {
+  flex-grow: 1;
+  text-align: center;
+}
+
+li a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+li a i {
+  font-size: 20px; /* Set the font size for icons */
+}
+
+@media screen and (max-width: 768px) {
+  li a {
+    padding: 10px 0; /* Adjusted padding for mobile devices */
+  }
+}
+  
+li a:hover:not(.active) {
+  background-color: white; /* Darker color on hover */
+  border-radius: 4px; /* Add some rounded corners */
+ color:black
+}
+
+.active {
+  background-color: white; /* Darker color for the active state */
+  border-radius: 4px; /* Add some rounded corners */
+color:black
+}
+
+ .container {
+      max-width: 600px; 
+      margin: auto;
+      background-color: black; 
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+      border-radius: 10px; 
+      overflow: hidden; 
+      margin-top: 20px;
+     padding:12px;
+      margin-bottom: 20px; 
+    flex-direction:row
+    }
+
+    .header {
+      padding: 10px;
+      box-sizing: border-box;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .user-info {
+      flex-grow: 1;
+    }
+
+    .user-info h2 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    .caption {
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+   
+
+    .time-date {
+      padding: 10px;
+      box-sizing: border-box;
+      text-align: left;
+      color:white;
+    }
+
+    .footer {
+      padding: 10px;
+      box-sizing: border-box;
+      border-top: 1px solid #ddd;
+      margin-top: 20px;
+    }
+       
+.image img {
+  grid-row: 1;
+  grid-column: 1;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; 
+}
+  </style>
+<body>
+
+<ul>
+  <li class="logo">picsta</li>
+  <li><a class="active" href="{{url_for("index")}}"><i class="fas fa-home"></i></a></li>
+<li><a href="{{url_for("search")}}"><i class="fas fa-search"></i></a></li>
+  <li><a href="{{url_for("upload")}}"><i class="fas fa-upload"></i></a></li>
+  <li><a href="{{url_for("id")}}"><img width="24" height="24" src="https://img.icons8.com/material-sharp/500/228BE6/user-male-circle.png" alt="user-male-circle"/></a></li>
+  
+
+</ul>
+<br>
+<br>
+
+{% if sus%}
+
+<h4 style="color:red">{{sus}}</h4>
+<img width="80" height="80" src="https://img.icons8.com/external-creatype-glyph-colourcreatype/100/FA5252/external-account-essential-ui-v4-creatype-glyph-colourcreatype.png" style=" display: block;
+  margin-left: auto;
+  margin-right: auto;">
+<h4 style="color:red;text-align:center;margin:50px">Your account  has been suspended</h4>
+<h6  style="color:red;text-align:center;margin:50px">you may have violated the terms and conditions of picsta</h6>
+ 
+
+{%endif%}
+
+{%for p in images%}
+   
+    <br>
+<br>
+   
+ <div class="container">
+    <div class="header">
+    <a href="{{url_for("profile",profile=p["userid"])}}" > <img src="{{p["userdp"]}}" alt="User Logo" class="dp"></a>
+      <div class="user-info">
+
+        <a href="{{ url_for('profile',profile=p["userid"]) }}">{{p["username"]}} </a>
+
+      </div>
+    </div>
+   
+    <div class="caption">
+      <p>{{p["caption"]}}</p>
+    </div>
+
+    <div class="image">
+      <img src="{{p["image_url"]}}"    alt="Image">
+    </div>
+
+    <div class="time-date">
+      <h6>{{p["time"]}}</h6>
+    </div>
+  </div>
+
+
+{%endfor%}
+
+
+</body>
+</html>
+
