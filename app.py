@@ -397,5 +397,3 @@ def settings():
              except Exception as e:
                  pass
       return render_template("settings.html",userdp=userdp,success=success)
-if __name__=="__main__":
-    app.run(debug=False)
